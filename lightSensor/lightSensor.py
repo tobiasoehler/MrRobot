@@ -12,6 +12,7 @@ class lightSensor:
         GPIO.output(self.pin, GPIO.LOW)
         time.sleep(0.1)
         GPIO.setup(self.pin, GPIO.IN)
+        GPIO.add_event_detect(self.pin, GPIO.RISING, callback=my_callback, bouncetime=300)
         while (GPIO.input(self.pin) == GPIO.HIGH):
             count += 1
 
@@ -23,6 +24,7 @@ class lightSensor:
         GPIO.output(self.pin, GPIO.LOW)
         time.sleep(0.1)
         GPIO.setup(self.pin, GPIO.IN)
+        GPIO.add_event_detect(self.pin, GPIO.RISING, callback=my_callback, bouncetime=300)
         while (GPIO.input(self.pin) == GPIO.LOW):
             count += 1
 
@@ -35,7 +37,7 @@ class lightSensor:
         else:
             return "false"
         #return GPIO.input(self.pin)
-        
+
 try:
     sensor = lightSensor(11)
     while True:
@@ -44,4 +46,3 @@ except KeyboardInterrupt:
     pass
 finally:
     GPIO.cleanup()
-
